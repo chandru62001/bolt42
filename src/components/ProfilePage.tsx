@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import toast from 'react-hot-toast';
 import { uploadProfilePhoto } from '../utils/photoStorage';
+import EmergencyContacts from './EmergencyContacts';
 
 function ProfilePage() {
   const { user, updateUser } = useAuth();
@@ -622,6 +623,18 @@ function ProfilePage() {
             </div>
           </motion.div>
         </div>
+
+        {/* Emergency Contacts Section - Only for Patients */}
+        {user.role === 'patient' && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-8"
+          >
+            <EmergencyContacts />
+          </motion.div>
+        )}
       </div>
     </div>
   );
